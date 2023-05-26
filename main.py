@@ -3,10 +3,7 @@ import time
 import tkinter
 
 
-def quit():
-    global tkTop
-    #ser.write(bytes('L', 'UTF-8'))
-    tkTop.destroy()
+
 
 def set_button1_state():
         global b
@@ -16,9 +13,20 @@ def set_button1_state():
         varLabel2.set(b)
         print(b)
 
-def set_button2_state():
-        varLabel.set("LED OFF")
-       #ser.write(bytes('L', 'UTF-8'))
+
+def set_Automated_Controls_state():
+    global Automated_Controls_state
+    if Automated_Controls_state == 1:
+        Automated_Controls_state = 0
+        varLabel.set("Automated Controls: Off ")
+    else:
+        Automated_Controls_state = 1
+        varLabel.set("Automated Controls: On ")
+
+
+
+Automated_Controls_state = 0
+
 
 #ser = serial.Serial('com5', 9600)
 #print("Reset Arduino")
@@ -105,12 +113,12 @@ LeftButtonsFrame.pack(fill=tkinter.BOTH, side=tkinter.LEFT, expand=True)
 RightButtonsFrame.pack(fill=tkinter.BOTH, side=tkinter.LEFT, expand=True)
 
 # Fill in the Automated controls Side----------------------------------------------------------------------------------------------------------------------------------------
-AutoFrame = tkinter.Frame(master=tkTop,width = 600, bg="blue")
-AutoLable = tkinter.Label(master= AutoFrame, text = 'Automated Controls',font=("Courier", 12,'bold')).pack(side='top', ipadx=10, padx=10, pady=40) #Automated controls lable
+AutoFrame = tkinter.Frame(master=tkTop,width = 600, bg="gray")
+AutoLable = tkinter.Label(master= AutoFrame, text = 'Automated Controls',font=("Courier", 12,'bold'), bg="gray").pack(side='top', ipadx=10, padx=10, pady=40) #Automated controls lable
 
 button_Automated_on_off = tkinter.Button(AutoFrame,
     text="Turn Automated Controls on/off",
-    command=set_button1_state,
+    command=set_Automated_Controls_state,
     height = 4,
     fg = "black",
     width = 25,
@@ -119,13 +127,17 @@ button_Automated_on_off = tkinter.Button(AutoFrame,
 )
 button_Automated_on_off.pack(side='top', ipadx=0, padx=0, pady=0)
 
+varLabel = tkinter.IntVar()
+tkLabel = tkinter.Label(master= AutoFrame, textvariable=varLabel, )
+tkLabel.pack()
 
-TargetHeightLable = tkinter.Label(master= AutoFrame, text = 'Enter Target Height: ',font=("Courier", 12)).pack(side='left', ipadx=10, padx=10, pady=40) #Automated controls lable
+
+TargetHeightLable = tkinter.Label(master= AutoFrame, text = 'Enter Target Height: ',font=("Courier", 12), bg="gray").pack(side='left', ipadx=10, padx=10, pady=40) #Automated controls lable
 TargetHeightEntry = tkinter.Entry(AutoFrame)
 TargetHeightEntry.pack(side='left', ipadx=0, padx=0, pady=0)
 
-
-
 AutoFrame.pack(fill=tkinter.BOTH, side=tkinter.LEFT, expand=True)
+
+TargetHeight = TargetHeightEntry.get()
 
 tkinter.mainloop()
