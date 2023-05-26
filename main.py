@@ -5,13 +5,20 @@ import tkinter
 
 
 
-def set_button1_state():
-        global b
-        b += 1
-        varLabel.set("LED ON ")
-       # ser.write(bytes('H', 'UTF-8'))
-        varLabel2.set(b)
-        print(b)
+def set_ActuatorSelection_left_state():
+    global ActuatorSelection_state
+    ActuatorSelection_state = 0
+    ActuatorSelectionLabel.set("Left")
+
+def set_ActuatorSelection_right_state():
+    global ActuatorSelection_state
+    ActuatorSelection_state = 1
+    ActuatorSelectionLabel.set("Right")
+
+def set_ActuatorSelection_both_state():
+    global ActuatorSelection_state
+    ActuatorSelection_state = 2
+    ActuatorSelectionLabel.set("Both")
 
 
 def set_Automated_Controls_state():
@@ -56,7 +63,7 @@ RightButtonsLable = tkinter.Label(master= RightButtonsFrame, text = 'Up/Down Con
 
 button_left_state = tkinter.Button(LeftButtonsFrame,
     text="Left",
-    command=set_button1_state,
+    command=set_ActuatorSelection_left_state,
     height = 4,
     fg = "black",
     width = 8,
@@ -67,7 +74,7 @@ button_left_state.pack(side='top', ipadx=10, padx=10, pady=40)
 
 button_right_state = tkinter.Button(LeftButtonsFrame,
     text="Right",
-    command=set_button1_state,
+    command=set_ActuatorSelection_right_state,
     height = 4,
     fg = "black",
     width = 8,
@@ -78,7 +85,7 @@ button_right_state.pack(side='top', ipadx=10, padx=10, pady=40)
 
 button_both_state = tkinter.Button(LeftButtonsFrame,
     text="Both",
-    command=set_button1_state,
+    command=set_ActuatorSelection_both_state,
     height = 4,
     fg = "black",
     width = 8,
@@ -87,9 +94,15 @@ button_both_state = tkinter.Button(LeftButtonsFrame,
 )
 button_both_state.pack(side='top', ipadx=10, padx=10, pady=40)
 
+
+ActuatorSelectionLabel = tkinter.IntVar()
+ActuatorSelection = tkinter.Label(master= LeftButtonsFrame, textvariable=ActuatorSelectionLabel )
+ActuatorSelection.pack()
+
+
 button_up_state = tkinter.Button(RightButtonsFrame,
     text="Up",
-    command=set_button1_state,
+    command=set_ActuatorSelection_both_state,
     height = 4,
     fg = "black",
     width = 8,
@@ -100,7 +113,7 @@ button_up_state.pack(side='top', ipadx=10, padx=10, pady=40)
 
 button_down_state = tkinter.Button(RightButtonsFrame,
     text="Down",
-    command=set_button1_state,
+    command=set_ActuatorSelection_both_state,
     height = 4,
     fg = "black",
     width = 8,
@@ -128,7 +141,7 @@ button_Automated_on_off = tkinter.Button(AutoFrame,
 button_Automated_on_off.pack(side='top', ipadx=0, padx=0, pady=0)
 
 varLabel = tkinter.IntVar()
-tkLabel = tkinter.Label(master= AutoFrame, textvariable=varLabel, )
+tkLabel = tkinter.Label(master= AutoFrame, textvariable=varLabel, bg="gray" )
 tkLabel.pack()
 
 
